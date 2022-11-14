@@ -1,0 +1,68 @@
+.fondo{
+    background-image: url(./img/espacio.jpg);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+}
+
+.cartasMesa{
+    display: flex;
+    padding: 5px;
+    width: 90%;
+    height: 40%;
+    margin-left: 5%;
+    margin-top: -250px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartaMesa{
+    align-content: center;
+    width: 200px;
+    height:250px;
+    background-color: rgb(30, 130, 90);
+    border: solid;
+    border-color: black;
+}
+
+.misCartas{
+    display: flex;
+    width: 99.5%;
+    height: 40%;
+    margin-top: 10px;
+    padding: 5px;
+    justify-content: center;
+    align-items: center;
+}
+
+.cartaMano{
+    width: 200px;
+    height:250px;
+    margin: 5px;
+    border: solid;
+    border-color: black;
+    background-color: rgb(30, 130, 90);
+}
+
+.antiguo{
+    font-size: 48px;
+    width: 5%;
+    height: 40%;
+    text-align: center;
+    writing-mode: vertical-lr;
+    transform: rotate(180deg);
+    text-decoration: underline;
+}
+
+.nuevo{
+    float: right;
+    font-size: 48px;
+    text-align: center;
+    width: 5%;
+    height: 40%;
+    height: 250px;
+    margin-left: 95%;
+    margin-top: -250px;
+    writing-mode: vertical-lr;
+    text-decoration: underline;
+}
