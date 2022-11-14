@@ -1,53 +1,68 @@
+<?php 
+	$cartas = array(1,2,3,4,5,6,7,8,9,10,11);
+	$cartasTablero= array();
+	$misCartas= array();
+	shuffle($cartas);
+
+
+	$primerCarta= array_shift($cartas);
+	array_push($cartasTablero, $primerCarta);
+
+	$cartaUno= array_shift($cartas);
+	array_push($misCartas, $cartaUno);
+
+	$cartaDos= array_shift($cartas);
+	array_push($misCartas, $cartaDos);
+
+	$cartaTres= array_shift($cartas);
+	array_push($misCartas, $cartaTres);
+?>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>TimeLine</title>
-
-	<script type="text/javascript">
-		function elegir(){
-			<?php echo "string"; ?>
-		}
-	</script>
+	<link rel="stylesheet" href="estilos.css"></link>
 </head>
-<body style="background-image: 'img/espacion.jpg';">
-	<h1 align="center">TIMELINE</h1>
-	<?php
-		$arrayName = array();
-		for ($i=0; $i < 20; $i++) { 
-			array_push($arrayName, $i);
-		}
-		shuffle($arrayName);
-	?>
-	<div style="background-color: rgb(128, 64, 00); width:100%; height: 40%; margin-top: 30px;">
-		<div align="center" style="padding: 5px;">
-			<button name="uno" value="A" style="width: 200px; height:250px; background-color: rgb(30, 130, 90);">
-			<?php  
-				print_r($arrayName[rand(0,19)]);
+<body class="fondo">
+	<h1 align="center" class="titulo">TIMELINE</h1>
+	<div class="antiguo">
+		ANTIGUO
+	</div>
+	<div class="cartasMesa">
+		<div class="cartaMesa">	
+			<input type="radio" name="tablero" id="1" class="left" value="left">
+			<?php
+				print_r($primerCarta);
 			?>
-		</button>
+			<input type="radio" name="tablero" id="1" class="right" value="right">
 		</div>
 	</div>
-	<div style="background-color: rgb(18, 124, 30); width: 100%; height: 40%; margin-top: 10px; padding: 5px;">
-		<img style="width: 200px; height:250px; background-color: rgb(30, 130, 90);"></img>
-		<div align="center" style="margin-top: -250px;">
-		<button name="uno" value="A" style="width: 200px; height:250px; background-color: rgb(30, 130, 90);">
-			<?php  
-				print_r($arrayName[rand(0,19)]);
+	<div class="nuevo">
+			NUEVO
+	</div>
+	<div class="misCartas">
+		<div class="cartaMano" onclick="">
+			<?php
+				echo "<input type='radio' name='test' value='$cartaUno'>";
+				print_r($cartaUno);
 			?>
-		</button>
-		<button name="uno" value="A" style="width: 200px; height:250px; background-color: rgb(30, 130, 90);">
-			<?php  
-				print_r($arrayName[rand(0,19)]);
-			?>
-		</button>
-		<button name="uno" value="A" style="width: 200px; height:250px; background-color: rgb(30, 130, 90);">
-			<?php  
-				print_r($arrayName[rand(0,19)]);
-			?>
-		</button>
 		</div>
+		<div class="cartaMano">
+			<?php  
+				echo "<input type='radio' name='test' value='$cartaDos'>";
+				print_r($cartaDos);
+			?>
+		</div>
+		<div class="cartaMano">
+			<?php  
+				echo "<input type='radio' name='test' value='$cartaTres'>";
+				print_r($cartaTres);
+			?>
+		</div>
+
+		<button onclick="probar()">COLOCAR</button>
 	</div>
 </body>
 </html>
