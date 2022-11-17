@@ -1,20 +1,22 @@
 <?php 
+session_start();
 	$cartas = array(1,2,3,4,5,6,7,8,9,10,11);
-	$cartasTablero= array();
-	$misCartas= array();
-	shuffle($cartas);
+	$_SESSION["baraja"]=$cartas;
+	$_SESSION["cartasMesa"]= array();
+	$_SESSION["cartasMano"]= array();
+	shuffle($_SESSION["baraja"]);
 
 
-	$primerCarta= array_shift($cartas);
+	$primerCarta= array_shift($_SESSION["baraja"]);
 	array_push($cartasTablero, $primerCarta);
 
-	$cartaUno= array_shift($cartas);
+	$cartaUno= array_shift($_SESSION["baraja"]);
 	array_push($misCartas, $cartaUno);
 
-	$cartaDos= array_shift($cartas);
+	$cartaDos= array_shift($_SESSION["baraja"]);
 	array_push($misCartas, $cartaDos);
 
-	$cartaTres= array_shift($cartas);
+	$cartaTres= array_shift($_SESSION["baraja"]);
 	array_push($misCartas, $cartaTres);
 ?>
 <!DOCTYPE html>
