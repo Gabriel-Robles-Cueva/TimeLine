@@ -8,16 +8,9 @@ session_start();
 
 
 	$primerCarta= array_shift($_SESSION["baraja"]);
-	array_push($_SESSION["cartasMesa"], $primerCarta);
 
-	$cartaUno= array_shift($_SESSION["baraja"]);
-	array_push($_SESSION["cartasMano"], $cartaUno);
 
-	$cartaDos= array_shift($_SESSION["baraja"]);
-	array_push($_SESSION["cartasMano"], $cartaDos);
 
-	$cartaTres= array_shift($_SESSION["baraja"]);
-	array_push($_SESSION["cartasMano"], $cartaTres);
 ?>
 <!DOCTYPE html>
 <html>
@@ -70,37 +63,19 @@ session_start();
 	<div class="nuevo">
 			NUEVO
 	</div>
+	<div class="misCartas">
 	<?php
-	/*for ($i=0; $i < 3; $i++) { 
-		echo '<div class="misCartas">';
+	
+	for ($i=0; $i < 3; $i++) { 
+		$robo= array_shift($_SESSION["baraja"]);
 		echo '<div class="cartaMano" onclick="">';
-		echo '<input type="radio" name="test" value="$cartaUno">';
-		print_r($cartaUno);
+		echo "<input type='radio' name='test' value='$robo'>";
+		print_r($robo);
 		echo'</div>';
 	}
-	do{
-		
-	}while(count($_SESSION["baraja"])!=0);*/
+	/* do{
+	}while(count($_SESSION["baraja"])!=0);  */
 	?>
-	<div class="misCartas">
-		<div class="cartaMano" onclick="">
-			<?php
-				echo "<input type='radio' name='test' value='$cartaUno'>";
-				print_r($cartaUno);
-			?>
-		</div>
-		<div class="cartaMano">
-			<?php  
-				echo "<input type='radio' name='test' value='$cartaDos'>";
-				print_r($cartaDos);
-			?>
-		</div>
-		<div class="cartaMano">
-			<?php  
-				echo "<input type='radio' name='test' value='$cartaTres'>";
-				print_r($cartaTres);
-			?>
-		</div>
 
 		<button onclick="colocar()">COLOCAR</button>
 	</div>
