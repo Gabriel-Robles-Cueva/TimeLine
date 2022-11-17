@@ -56,7 +56,7 @@ session_start();
 	for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
 		$robo = $_SESSION['cartasMano'][$i];
 		echo '<div class="cartaMano" onclick="">';
-		echo "<input type='radio' name='test' value='$robo'>";
+		echo "<input name='cartaMano' type='radio' name='test' value='$robo'>";
 		print_r($_SESSION['cartasMano'][$i]);
 		echo'</div>';
 	}
