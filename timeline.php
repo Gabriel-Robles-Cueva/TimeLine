@@ -41,11 +41,22 @@ session_start();
 			<input type="radio" name="tablero" id="1" class="right" value="right">
 		</div>
 	</div>
+
+
+	<script type="text/javascript">
+		function colocar(){
+			if (document.getElementById("1").checked){
+				if (document.getElementById("")) {}
+			}
+		}
+	</script>
+
+
 	<div class="nuevo">
 			NUEVO
 	</div>
 	<?php
-	for ($i=0; $i < 3; $i++) { 
+	/*for ($i=0; $i < 3; $i++) { 
 		echo '<div class="misCartas">';
 		echo '<div class="cartaMano" onclick="">';
 		echo '<input type="radio" name="test" value="$cartaUno">';
@@ -54,7 +65,7 @@ session_start();
 	}
 	do{
 		
-	}while(count($_SESSION["baraja"])!=0);
+	}while(count($_SESSION["baraja"])!=0);*/
 	?>
 	<div class="misCartas">
 		<div class="cartaMano" onclick="">
@@ -76,7 +87,7 @@ session_start();
 			?>
 		</div>
 
-		<button onclick="probar()">COLOCAR</button>
+		<button onclick="colocar()">COLOCAR</button>
 	</div>
 </body>
 </html>
