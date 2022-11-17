@@ -45,7 +45,7 @@ session_start();
 			NUEVO
 	</div>
 	<?php
-	for ($i=0; $i < 3; $i++) { 
+	/* for ($i=0; $i < 3; $i++) { 
 		echo '<div class="misCartas">';
 		echo '<div class="cartaMano" onclick="">';
 		echo '<input type="radio" name="test" value="$cartaUno">';
@@ -54,7 +54,7 @@ session_start();
 	}
 	do{
 		
-	}while(count($_SESSION["baraja"])!=0);
+	}while(count($_SESSION["baraja"])!=0); */
 	?>
 	<div class="misCartas">
 		<div class="cartaMano" onclick="">
