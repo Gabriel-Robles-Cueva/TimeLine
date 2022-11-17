@@ -7,6 +7,9 @@ session_start();
 	shuffle($_SESSION["baraja"]);
 
 	$_SESSION["cartasMesa"][]= array_shift($_SESSION["baraja"]);
+	for($i=0; $i<3; $i++){
+		$_SESSION["cartasMano"][] = array_shift($_SESSION["baraja"]);
+	}
 
 ?>
 <!DOCTYPE html>
@@ -25,7 +28,7 @@ session_start();
 	<div class="cartasMesa">
 		<?php
 		for ($i=0; $i < count($_SESSION["cartasMesa"]); $i++) { 
-
+			sort($_SESSION['cartasMesa']);
 			echo "<div class='cartaMesa'>	
 			<input type='radio' name='tablero' id='1' class='left' value='left'>";
 			print_r($_SESSION["cartasMesa"][$i]);
@@ -39,7 +42,7 @@ session_start();
 	<?php  
 		function colocar()
 		{
-			// code...
+			
 		}
 	?>
 
@@ -50,11 +53,11 @@ session_start();
 	<div class="misCartas">
 	<?php
 	
-	for ($i=0; $i < 3; $i++) { 
-		$robo= array_shift($_SESSION["baraja"]);
+	for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
+		$robo = $_SESSION['cartasMano'][$i];
 		echo '<div class="cartaMano" onclick="">';
 		echo "<input type='radio' name='test' value='$robo'>";
-		print_r($robo);
+		print_r($_SESSION['cartasMano'][$i]);
 		echo'</div>';
 	}
 	/* do{
