@@ -6,7 +6,8 @@ session_start();
 	$_SESSION["cartasMano"]= array();
 	shuffle($_SESSION["baraja"]);
 
-	$primerCarta= array_shift($_SESSION["baraja"]);
+	$_SESSION["cartasMesa"]= array_shift($_SESSION["baraja"]);
+	
 ?>
 <!DOCTYPE html>
 <html>
@@ -22,13 +23,18 @@ session_start();
 		ANTIGUO
 	</div>
 	<div class="cartasMesa">
-		<div class="cartaMesa">	
-			<input type="radio" name="tablero" id="1" class="left" value="left">
-			<?php
-				print_r($primerCarta);
-			?>
-			<input type="radio" name="tablero" id="2" class="right" value="right">
-		</div>
+		<?php
+		for ($i=0; $i <= count($_SESSION); $i++) { 
+			# code...
+		}
+			echo "<div class='cartaMesa'>	
+			<input type='radio' name='tablero' id='1' class='left' value='left'>";
+			print_r($_SESSION['cartasMesa'][]);
+			echo "<input type='radio' name='tablero' id='2' class='right' value='right'>
+			</div>";
+
+		?>
+		
 	</div>
 
 
@@ -73,7 +79,7 @@ session_start();
 	?>
 
 		<button onclick="colocar()">COLOCAR</button>
-		
+
 	</div>
 </body>
 </html>
