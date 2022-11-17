@@ -29,7 +29,7 @@ session_start();
 		}
 			echo "<div class='cartaMesa'>	
 			<input type='radio' name='tablero' id='1' class='left' value='left'>";
-			print_r($_SESSION['cartasMesa'][]);
+			print_r($_SESSION["cartasMesa"][$i]);
 			echo "<input type='radio' name='tablero' id='2' class='right' value='right'>
 			</div>";
 
