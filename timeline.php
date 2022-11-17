@@ -17,6 +17,7 @@ session_start();
 	<div class="antiguo">
 		ANTIGUO
 	</div>
+	<form action="timeline.php" method="post">
 	<div class="cartasMesa">
 		<?php
 		for ($i=0; $i < count($_SESSION["cartasMesa"]); $i++) { 
@@ -32,8 +33,12 @@ session_start();
 	</div>
 
 	<?php  
-		if (isset($_POST['tablero'])) {
-			
+		if (isset($_POST['tablero'] and isset($_POST['cartaMano']))) {
+			switch ($p) {
+				case 0:
+					unset($_SESSION['cartasMano'][0]);
+					break;
+			}
 		}
 	?>
 
@@ -58,5 +63,6 @@ session_start();
 		<button onclick="colocar()">COLOCAR</button>
 
 	</div>
+</form>
 </body>
 </html>
