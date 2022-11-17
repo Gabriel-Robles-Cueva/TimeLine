@@ -6,11 +6,7 @@ session_start();
 	$_SESSION["cartasMano"]= array();
 	shuffle($_SESSION["baraja"]);
 
-
 	$primerCarta= array_shift($_SESSION["baraja"]);
-
-
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -59,7 +55,6 @@ session_start();
 		}
 	</script>
 
-
 	<div class="nuevo">
 			NUEVO
 	</div>
@@ -78,6 +73,7 @@ session_start();
 	?>
 
 		<button onclick="colocar()">COLOCAR</button>
+		
 	</div>
 </body>
 </html>
