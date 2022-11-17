@@ -38,15 +38,30 @@ session_start();
 			<?php
 				print_r($primerCarta);
 			?>
-			<input type="radio" name="tablero" id="1" class="right" value="right">
+			<input type="radio" name="tablero" id="2" class="right" value="right">
 		</div>
 	</div>
 
 
 	<script type="text/javascript">
 		function colocar(){
-			if (document.getElementById("1").checked){
-				if (document.getElementById("")) {}
+			var a= document.getElementById("1").checked
+			if (a){
+				<?php  
+					echo "<div class='cartaMesa'>";	
+					echo "<input type='radio' name='tablero' id='1' class='left' value='left'>";
+					print("1234");
+					echo "<input type='radio' name='tablero' id='2' class='right' value='right'>";
+					echo "</div>";
+				?>
+			}else{
+				<?php  
+					echo "<div class='cartaMesa'>";	
+					echo "<input type='radio' name='tablero' id='1' class='left' value='left'>";
+					print("1234");
+					echo "<input type='radio' name='tablero' id='2' class='right' value='right'>";
+					echo "</div>";
+				?>
 			}
 		}
 	</script>
