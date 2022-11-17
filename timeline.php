@@ -8,16 +8,16 @@ session_start();
 
 
 	$primerCarta= array_shift($_SESSION["baraja"]);
-	array_push($cartasTablero, $primerCarta);
+	array_push($_SESSION["cartasMesa"], $primerCarta);
 
 	$cartaUno= array_shift($_SESSION["baraja"]);
-	array_push($misCartas, $cartaUno);
+	array_push($_SESSION["cartasMano"], $cartaUno);
 
 	$cartaDos= array_shift($_SESSION["baraja"]);
-	array_push($misCartas, $cartaDos);
+	array_push($_SESSION["cartasMano"], $cartaDos);
 
 	$cartaTres= array_shift($_SESSION["baraja"]);
-	array_push($misCartas, $cartaTres);
+	array_push($_SESSION["cartasMano"], $cartaTres);
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,6 +44,18 @@ session_start();
 	<div class="nuevo">
 			NUEVO
 	</div>
+	<?php
+	for ($i=0; $i < 3; $i++) { 
+		echo '<div class="misCartas">';
+		echo '<div class="cartaMano" onclick="">';
+		echo '<input type="radio" name="test" value="$cartaUno">';
+		print_r($cartaUno);
+		echo'</div>';
+	}
+	do{
+		
+	}while(count($_SESSION["baraja"])!=0);
+	?>
 	<div class="misCartas">
 		<div class="cartaMano" onclick="">
 			<?php
