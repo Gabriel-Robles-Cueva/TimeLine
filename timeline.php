@@ -13,14 +13,14 @@ session_start();
 	<h1 align="center" class="titulo">TIMELINE</h1>
 	<div class="antiguo">
 		ANTIGUO
-	</div>
+	</div> 
 	<form action="timeline.php" method="post">
 		<div class="cartasMesa">
 			<?php
 			for ($i=0; $i < count($_SESSION["cartasMesa"]); $i++) { 
 				sort($_SESSION['cartasMesa']);
-				echo "<div class='cartaMesa'>";
 				?>	
+				<div class='cartaMesa'>
 				<input type='radio' name='tablero' id='tablero' class='left' value='left'>
 				<?php 
 				print_r($_SESSION["cartasMesa"][$i]);
@@ -31,11 +31,6 @@ session_start();
 			}
 			?>			
 		</div>
-		<?php
-			$valorTablero= $_SESSION['tablero'];
-		?>
-
-
 		<div class="nuevo">
 				NUEVO
 		</div>
