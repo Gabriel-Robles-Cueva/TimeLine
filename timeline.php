@@ -28,9 +28,13 @@ session_start();
 				<input type='radio' name='carta' id='tablero' class='right' value='right'>
 				</div>
 			<?php
-			}
-			$a= $_POST['carta'];
-			echo "$a";
+			}	
+				function colocar()
+				{
+					if (!isset($_POST['tablero'])) {
+					echo "<img src='./img/Maquina.png'></img>";
+					}
+				}
 			?>
 		</div>
 		<div class="nuevo">
@@ -41,7 +45,7 @@ session_start();
 		
 		for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
 			$robo = $_SESSION['cartasMano'][$i];
-			echo '<div class="cartaMano" onclick="">';
+			echo '<div class="cartaMano">';
 			echo "<input name='cartaMano' type='radio' name='test' value='$robo'>";
 			print_r($_SESSION['cartasMano'][$i]);
 			echo'</div>';
