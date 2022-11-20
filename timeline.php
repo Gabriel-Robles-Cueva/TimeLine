@@ -21,15 +21,17 @@ session_start();
 				sort($_SESSION['cartasMesa']);
 				?>	
 				<div class='cartaMesa'>
-				<input type='radio' name='tablero' id='tablero' class='left' value='left'>
+				<input type='radio' name='carta' id='tablero' class='left' value='left'>
 				<?php 
 				print_r($_SESSION["cartasMesa"][$i]);
 				?>
-				<input type='radio' name='tablero' id='tablero' class='right' value='right'>
+				<input type='radio' name='carta' id='tablero' class='right' value='right'>
 				</div>
 			<?php
 			}
-			?>			
+			$a= $_POST['carta'];
+			echo "$a";
+			?>
 		</div>
 		<div class="nuevo">
 				NUEVO
