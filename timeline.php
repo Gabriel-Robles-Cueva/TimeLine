@@ -33,7 +33,7 @@ session_start();
 	</div>
 
 	<?php  
-		if (isset($_POST['tablero'] and isset($_POST['cartaMano']))) {
+		if (isset($_POST['tablero']) and isset($_POST['cartaMano'])) {
 			switch ($p) {
 				case 0:
 					unset($_SESSION['cartasMano'][0]);
