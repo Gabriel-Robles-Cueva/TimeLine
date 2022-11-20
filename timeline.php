@@ -29,12 +29,7 @@ session_start();
 				</div>
 			<?php
 			}	
-				function colocar()
-				{
-					if (!isset($_POST['tablero'])) {
-					echo "<img src='./img/Maquina.png'></img>";
-					}
-				}
+				echo "$_POST['tablero']";
 			?>
 		</div>
 		<div class="nuevo">
