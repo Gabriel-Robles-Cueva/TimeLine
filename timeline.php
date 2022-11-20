@@ -33,11 +33,10 @@ session_start();
 	</div>
 
 	<?php  
-		if (isset($_POST['tablero']) and isset($_POST['cartaMano'])) {
-			switch ($p) {
-				case 0:
-					unset($_SESSION['cartasMano'][0]);
-					break;
+		function colocar()
+		{
+			if (isset($_POST['tablero']) and isset($_POST['cartaMano'])) {
+				echo "<h1>AAAAAAAAAAAA</h1>";
 			}
 		}
 	?>

@@ -11,10 +11,13 @@
 	}
 ?>
 <html>
-    <body>
+    <body style="background-image: url(./img/espacio.jpg); background-size: 100% 100%; background-repeat: no-repeat; background-attachment: fixed;">
         <form action="timeline.php">
-        <h1 align = center> Bienvendio</h1>
-        <input type=submit value="Empecemos"/>
+        <h1 align = center>Bienvendio a Timeline</h1>
+        <div align="center">
+        <p><img src="./img/Maquina.png" width="500px" height="400px"></p>
+        <input type=submit value="EMPECEMOS" style="width: 200px; height: 100px; background: rgb(30, 130, 90);" />
+        </div>
         </form>
     </body>
 </html>
