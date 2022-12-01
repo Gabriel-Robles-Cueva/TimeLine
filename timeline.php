@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION["baraja"]
 ?>
 <!DOCTYPE html>
 <html>
@@ -44,11 +45,19 @@ session_start();
 			print_r($_SESSION['cartasMano'][$i]);
 			echo'</div>';
 		}
-		
 		?>
 
 			<button onclick="colocar()">COLOCAR</button>
-
+		<?php
+		if(coutn($_SESSION["cartasMano"]) == 0){
+			//has ganado
+		}
+		if($_POST["tablero"] == "left"){
+			//if(la carta seleccionada se compara si es antiguo)
+		}else if($_POST["tablero"] == "right"){
+			//if(la carta seleccionada se compara si es moderno)
+		}
+		?>
 		</div>
 	</form>
 </body>
