@@ -29,7 +29,7 @@ session_start();
 				</div>
 			<?php
 			}	
-				echo "$_POST['tablero']";
+				echo "$_POST[tablero]";
 			?>
 		</div>
 		<div class="nuevo">
