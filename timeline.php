@@ -21,16 +21,15 @@ session_start();
 				sort($_SESSION['cartasMesa']);
 				?>	
 				<div class='cartaMesa'>
-				<input type='radio' name='carta' id='tablero' class='left' value='left'>
+				<input type='radio' name='tablero' id='tablero' class='left' value='left'>
 				<?php 
 				print_r($_SESSION["cartasMesa"][$i]);
 				?>
-				<input type='radio' name='carta' id='tablero' class='right' value='right'>
+				<input type='radio' name='tablero' id='tablero' class='right' value='right'>
 				</div>
 			<?php
-			}	
-				echo "$_POST['tablero']";
-			?>
+			}
+			?>			
 		</div>
 		<div class="nuevo">
 				NUEVO
@@ -40,13 +39,12 @@ session_start();
 		
 		for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
 			$robo = $_SESSION['cartasMano'][$i];
-			echo '<div class="cartaMano">';
+			echo '<div class="cartaMano" onclick="">';
 			echo "<input name='cartaMano' type='radio' name='test' value='$robo'>";
 			print_r($_SESSION['cartasMano'][$i]);
 			echo'</div>';
 		}
-		/* do{
-		}while(count($_SESSION["baraja"])!=0);  */
+		
 		?>
 
 			<button onclick="colocar()">COLOCAR</button>
