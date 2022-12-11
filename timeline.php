@@ -1,5 +1,6 @@
 <?php 
 session_start();
+$_SESSION["baraja"]
 ?>
 <!DOCTYPE html>
 <html>
@@ -37,11 +38,31 @@ session_start();
 		<?php
 		for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
 			$robo = $_SESSION['cartasMano'][$i];
+<<<<<<< HEAD
 		?>
 		<div class="cartaMano">
 		<input name='cartaMano' id='<?php $i ?>' type='radio' value='<?php $robo ?>'>
 		<?php 
 			print_r($_SESSION['cartasMano'][$i]);
+=======
+			echo '<div class="cartaMano" onclick="">';
+			echo "<input name='cartaMano' type='radio' name='test' value='$robo'>";
+			print_r($_SESSION['cartasMano'][$i]);
+			echo'</div>';
+		}
+		?>
+
+			<button onclick="colocar()">COLOCAR</button>
+		<?php
+		if(coutn($_SESSION["cartasMano"]) == 0){
+			//has ganado
+		}
+		if($_POST["tablero"] == "left"){
+			//if(la carta seleccionada se compara si es antiguo)
+		}else if($_POST["tablero"] == "right"){
+			//if(la carta seleccionada se compara si es moderno)
+		}
+>>>>>>> 5f8a27a503738feab9b07f5f8e9e6148ed712f4e
 		?>
 		</div>
 		<?php
