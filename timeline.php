@@ -14,8 +14,7 @@ session_start();
 	<div class="antiguo">
 		ANTIGUO
 	</div> 
-	<form action="timeline.php" method="post">
-		<div class="cartasMesa">
+		<div class="cartasMesa" id="cartasMesa">
 			<?php
 			for ($i=0; $i < count($_SESSION["cartasMesa"]); $i++) { 
 				sort($_SESSION['cartasMesa']);
@@ -34,22 +33,68 @@ session_start();
 		<div class="nuevo">
 				NUEVO
 		</div>
-		<div class="misCartas">
+		<div class="misCartas" id="misCartas">
 		<?php
-		
 		for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
 			$robo = $_SESSION['cartasMano'][$i];
-			echo '<div class="cartaMano" onclick="">';
-			echo "<input name='cartaMano' type='radio' name='test' value='$robo'>";
-			print_r($_SESSION['cartasMano'][$i]);
-			echo'</div>';
-		}
-		
 		?>
-
-			<button onclick="colocar()">COLOCAR</button>
-
+		<div class="cartaMano">
+		<input name='cartaMano' id='<?php $i ?>' type='radio' value='<?php $robo ?>'>
+		<?php 
+			print_r($_SESSION['cartasMano'][$i]);
+		?>
 		</div>
-	</form>
+		<?php
+			}
+		?>
+			<button onclick='colocar()'>COLOCAR</button>
+		</div>
+
+	<script type="text/javascript">
+
+		function probar(){
+			/*var divFr= document.createElement("div")
+
+			divFr.style.backgroundColor= "red"
+			divFr.style.width= "200px"
+			divFr.style.height= "200px"
+			divFr.style.margin= "auto"
+
+			document.body.appendChild(divFr)*/
+			var prueba= document.getElementsByName("tablero");
+			var prueba2= document.getElementsByName('cartaMano')
+			var prueba3= document.getElementById('misCartas')
+
+			for(i=0; i<prueba.length; i++){
+				if(prueba[i].checked){
+					if(prueba[i].value=="left"){
+						alert("left")
+					} else if (prueba[i].value=="right"){
+						alert("right")
+					}
+				}
+			}
+
+			for(i=0; i<prueba2.length; i++){
+				if(prueba2[i].checked){
+					prueba3.removeChild(i)
+				}
+			}
+		}
+
+		function colocar() {
+			var prueba= document.getElementsByName('cartaMano')
+			var prueba2= document.getElementsByName('tablero')
+
+			for(i=0; i<prueba.length; i++){
+				for(j=0; j<tablero.length; j++){
+					if(prueba[i].checked && tablero[j].checked){
+						probar()
+					}
+				}
+			}
+		}
+	</script>
+
 </body>
 </html>
