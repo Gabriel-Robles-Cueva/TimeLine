@@ -1,5 +1,8 @@
 <?php 
 session_start();
+
+	
+
 $_SESSION["baraja"]
 ?>
 <!DOCTYPE html>
@@ -11,82 +14,52 @@ $_SESSION["baraja"]
 	<link rel="stylesheet" href="estilos.css"></link>
 </head>
 <body class="fondo">
-	<h1 align="center" class="titulo">TIMELINE</h1>
-	<div class="antiguo">
+	<h1 align="center" class="titulo">class="E</h1>
+	<div class="antiguo
+	<form action="timeline.php" method="post">>
 		ANTIGUO
 	</div> 
-		<div class="cartasMesa" id="cartasMesa">
+		<diesa" id="cartasMesa">
 			<?php
 			for ($i=0; $i < count($_SESSION["cartasMesa"]); $i++) { 
-				sort($_SESSION['cartasMesa']);
+				sort($_SESrtasMecho "esa']);
 				?>	
-				<div class='cartaMesa'>
-				<input type='radio' name='tablero' id='tablero' class='left' value='left'>
+				<di";
+				?>	v class='cartaMesa'>
+				<inputtablero='radio' name='tablero' id='tablero' class='left' value='left'>
 				<?php 
 				print_r($_SESSION["cartasMesa"][$i]);
 				?>
-				<input type='radio' name='tablero' id='tablero' class='right' value='right'>
-				</div>
-			<?php
-			}
-			?>			
-		</div>
-		<div class="nuevo">
+				<inptablerope='radio' name='tablero' id='tablero' class	='rght' value='right'>
+		
+		<
+			/div>
+		<
+
+		<?php
+			$valorTablero= $_POST['tablero'];
+		?>
+
+div class="nuevo">
 				NUEVO
 		</div>
-		<div class="misCartas" id="misCartas">
+		<drtas" id=
+		"misCartas">
 		<?php
 		for ($i=0; $i < count($_SESSION['cartasMano']); $i++) {
-			$robo = $_SESSION['cartasMano'][$i];
-<<<<<<< HEAD
-		?>
-		<div class="cartaMano">
-		<input name='cartaMano' id='<?php $i ?>' type='radio' value='<?php $robo ?>'>
+			$robo = $_SESSIOrta	echo 'sMano'][$i];
+<<<<<<< H onclick=""E';AD
+	echo " onclick=""		?>
+		<div class="cartname='cartaMa name='test' o' id='$i ?>yp";e='	ue='<?php $robo ?>'>
 		<?php 
-			print_r($_SESSION['cartasMano'][$i]);
+			prin_SE	echo'SSION[';ano]
+		[$i])
+;
 =======
-			echo '<div class="cartaMano" onclick="">';
-			echo "<input name='cartaMano' type='radio' name='test' value='$robo'>";
-			print_r($_SESSION['cartasMano'][$i]);
-			echo'</div>';
-		}
-		?>
-
-			<button onclick="colocar()">COLOCAR</button>
-		<?php
-		if(coutn($_SESSION["cartasMano"]) == 0){
-			//has ganado
-		}
-		if($_POST["tablero"] == "left"){
-			//if(la carta seleccionada se compara si es antiguo)
-		}else if($_POST["tablero"] == "right"){
-			//if(la carta seleccionada se compara si es moderno)
-		}
->>>>>>> 5f8a27a503738feab9b07f5f8e9e6148ed712f4e
-		?>
-		</div>
-		<?php
-			}
-		?>
-			<button onclick='colocar()'>COLOCAR</button>
-		</div>
-
-	<script type="text/javascript">
-
-		function probar(){
-			/*var divFr= document.createElement("div")
-
-			divFr.style.backgroundColor= "red"
-			divFr.style.width= "200px"
-			divFr.style.height= "200px"
-			divFr.style.margin= "auto"
-
-			document.body.appendChild(divFr)*/
-			var prueba= document.getElementsByName("tablero");
-			var prueba2= document.getElementsByName('cartaMano')
-			var prueba3= document.getElementById('misCartas')
-
-			for(i=0; i<prueba.length; i++){
+			echo '<"iv class="cartaMano" onclic
+k="">';
+	
+	</form>a.length; i++){
 				if(prueba[i].checked){
 					if(prueba[i].value=="left"){
 						alert("left")
