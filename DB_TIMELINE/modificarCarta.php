@@ -23,15 +23,35 @@
 
       	if (isset($_POST["nombre"])) {
       		$nombre = $_POST["nombre"];
+      		$mazo = $_POST["mazoCam"];
       		$nombreCam = $_POST["nombreCam"];
-			$desc = $_POST["descripcion"];
-			modificarMazo($conDB,$nombre,$nombreCam,$desc);	
+			$anio = $_POST["anioCam"];
+			$img = $_POST["imgCam"];
+			modificarCarta($conDB,$nombre, $mazo, $nombreCam, $anio, $img);	
       	}
 	?>
+	<h1 align="center">MODIFICAR CARTA</h1>
 	<div class="container">
-		<h1 align="center">MODIFICAR MAZO</h1>
-		<form method="post" action="modificarMazo.php"> 
-		Mazo a Modificar &nbsp;<select name="nombre">
+		<form method="post" action="modificarCarta.php"> 
+		Carta a Modificar &nbsp;<select name="nombre">
+			<?php  
+				$mazos= getAllMazos($conDB);
+				$cartas= getAllCartas($conDB);
+				for ($i=0; $i < count($mazos); $i++) { 
+					echo "<optgroup label=".$mazos[$i]["NOMBRE"].">";
+						for ($j=0; $j < count($cartas); $j++) {
+							$cartaMazo= $cartas[$j]["MAZO"];
+							$mazoNombre= $mazos[$i]["NOMBRE"];
+							if ($mazoNombre == $cartaMazo){
+								echo "<option>".$cartas[$j]["NOMBRE"]."</option>";	
+							}
+						}
+					echo "</optgroup>";
+				}
+			?>
+		</select>	
+		<br><br>
+		Modificar Su Mazo&nbsp;<select name="mazoCam">
 			<?php  
 				$resultados= getAllMazos($conDB);
 				var_export($resultados);
@@ -43,7 +63,9 @@
 		<br><br>
 		Nuevo Nombre &nbsp;<input type="text" placeholder="Cambia el nombre" name="nombreCam">
 		<br><br>
-		Nueva Descripcion &nbsp;<input type="text" placeholder="Cambia la descripcion" name="descripcion">
+		Nuevo Año &nbsp;<input type="number" placeholder="Cambia el año" name="anioCam">
+		<br><br>
+		Nueva Imagen &nbsp;<input type="file" name="imgCam" accept="image/png, .jpg, .jpeg, image/gif">
 		<br><br>
 		<button>MODIFICAR</button>
 		</form>

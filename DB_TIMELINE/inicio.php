@@ -20,19 +20,11 @@
 	<?php  
 		require_once("dbutils.php");
       	$conDB = conectarDB();
-
-      	if (isset($_POST["mazo"]) && isset($_POST["nombre"]) && isset($_POST["anio"])) {
-      		$mazo= $_POST['mazo'];
-      		$nombre = $_POST["nombre"];
-			$anio = $_POST["anio"];
-			$img = $_POST["img"];
-			crearCarta($conDB, $mazo, $nombre, $anio, $img);
-      	}
 	?>
-	<h1 align="center">CREAR CARTA</h1>
+	<h1 align="center">INICIO TIMELINE</h1>
 	<div class="container">
-		<form method="post" action="crearCarta.php"> 
-		Mazo Al Que Pertenece &nbsp;<select name="mazo" required>
+		<form method="post" action="dommy.php"> 
+		<h3>Elige Un Mazo:</h3> &nbsp;&nbsp;<select name="nombre" class="form-select" style="width: 200px;">
 			<?php  
 				$resultados= getAllMazos($conDB);
 				var_export($resultados);
@@ -42,13 +34,7 @@
 			?>
 		</select>
 		<br><br>
-		NOMBRE &nbsp;<input type="text" placeholder="Introduce El Nombre De La Carta" name="nombre" required>
-		<br><br>
-		AÑO &nbsp;<input type="number" placeholder="Introduce El Año Correspondiente" name="anio" required>
-		<br><br>
-		IMAGEN &nbsp;<input type="file" name="img" accept="image/png, .jpg, .jpeg, image/gif">
-		<br><br>
-		<button>CREAR</button>
+		<button class="btn btn-outline-primary">EMPEZAR</button>
 		</form>
 	</div>
 </body>

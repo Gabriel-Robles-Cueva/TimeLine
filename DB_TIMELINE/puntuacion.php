@@ -20,21 +20,13 @@
 	<?php  
 		require_once("dbutils.php");
       	$conDB = conectarDB();
-
-      	if (isset($_POST["nombre"]) && isset($_POST["descripcion"])) {
-      		$nombre = $_POST["nombre"];
-			$desc = $_POST["descripcion"];
-			crearMazo($conDB, $nombre, $desc);
-      	}
 	?>
-	<h1 align="center">CREAR MAZO</h1>
+	<h1 align="center">RANKING PUNTUACIONES</h1>
 	<div class="container">
-		<form method="post" action="crearMazo.php"> 
-		NOMBRE &nbsp;<input type="text" placeholder="Introduce el nombre del mazo" name="nombre" required>
+		<form method="post" action="dommy.php"> 
 		<br><br>
-		DESCRIPCION &nbsp;<input type="text" placeholder="Introduce la descripcion del mazo" name="descripcion">
-		<br><br>
-		<button>CREAR</button>
+		
+		<button class="btn btn-outline-primary">SALIR</button>
 		</form>
 	</div>
 </body>

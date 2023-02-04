@@ -14,6 +14,9 @@
     }
   }
 
+  //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++GET++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
+
+
   function getAllMazos($conDb)
   {
     $vectorTotal = array();
@@ -22,6 +25,47 @@
       $sql = "SELECT * FROM mazos";
       $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
       $stmt->execute(array());
+      while($fila = $stmt->fetch(PDO::FETCH_ASSOC))
+      {
+        $vectorTotal[]=$fila;
+      }
+     }
+    catch (PDOException $ex)
+    {
+      echo ("Error al conectar".$ex->getMessage());
+    }
+    return $vectorTotal;
+  }
+
+  function getAllCartas($conDb)
+  {
+    $vectorTotal = array();
+    try
+    {
+      $sql = "SELECT * FROM cartas";
+      $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+      $stmt->execute(array());
+      while($fila = $stmt->fetch(PDO::FETCH_ASSOC))
+      {
+        $vectorTotal[]=$fila;
+      }
+     }
+    catch (PDOException $ex)
+    {
+      echo ("Error al conectar".$ex->getMessage());
+    }
+    return $vectorTotal;
+  }
+
+
+  function getAllCartasFromMazo($conDb, $mazo)
+  {
+    $vectorTotal = array();
+    try
+    {
+      $sql = "SELECT * FROM cartas WHERE MAZO=:mazo";
+      $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+      $stmt->execute(array(":mazo"=>$mazo));
       while($fila = $stmt->fetch(PDO::FETCH_ASSOC))
       {
         $vectorTotal[]=$fila;
@@ -53,15 +97,15 @@
    function crearCarta($con, $mazo, $nombre, $anio, $img)
    {
     try {
-      $sql= "INSERT INTO cartas(MAZO, NOMBRE, AÑO, IMAGEN) VALUES (:MAZO,:NOMBRE,:AÑO,:IMAGEN)";
+      $sql= "INSERT INTO cartas(MAZO, NOMBRE, ANIO, IMAGEN) VALUES (:MAZO,:NOMBRE,:ANIO,:IMAGEN)";
       $stmt= $con->prepare($sql);
       $stmt->bindParam(':MAZO', $mazo);
       $stmt->bindParam(':NOMBRE', $nombre);
-      $stmt->bindParam(':AÑO', $anio);
+      $stmt->bindParam(':ANIO', $anio);
       $stmt->bindParam(':IMAGEN', $img);
       $stmt->execute();
     } catch (Exception $ex) {
-      echo ("Error al crear".$ex->getMessage());
+      echo ("Error al crear ".$ex->getMessage());
     }
     return $con->lastInsertId();
    }
@@ -83,95 +127,53 @@
     return $result;
    }
 
+   function borrarCarta($con, $nombre)
+   {
+    try {
+      $sql= "DELETE FROM cartas WHERE NOMBRE=:nombre";
+      $stmt= $con->prepare($sql);
+      $stmt->bindParam(":nombre",$nombre);
+      $stmt->execute();
+      $result= $stmt->rowCount();
+    } 
+    catch (Exception $e) {
+      echo ("Error al borrar".$ex->getMessage());
+    }
+    return $result;
+   }
+
    //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++MODICAR++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
 
-  function modificarMazo($conDb, $nombre, $nombreCam, $desc)
-  {
-    $result =0;
-    try
-    {
-      $sql = "UPDATE mazos SET NOMBRE=:nombreCam, DESCRIPCION=:descripcion WHERE NOMBRE=:nombre";
-
-      $stmt = $conDb->prepare($sql);
-      $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
-      $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
-      $stmt->bindParam(':descripcion', $desc,PDO::PARAM_STR);
-      
-      $stmt->execute();
-      $result = $stmt->rowCount();
-     }
-    catch (PDOException $ex)
-    {
-      echo ("Error en modificarMazo()".$ex->getMessage());
-    }
-    return $result;
-  }
-
-  function modificarMazoNombre($conDb, $nombre, $nombreCam)
-  {
-    $result =0;
-    try
-    {
-      $sql = "UPDATE mazos SET NOMBRE=:nombreCam WHERE NOMBRE=:nombre";
-
-      $stmt = $conDb->prepare($sql);
-      $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
-      $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
-      
-      $stmt->execute();
-      $result = $stmt->rowCount();
-     }
-    catch (PDOException $ex)
-    {
-      echo ("Error en modificarMazo()".$ex->getMessage());
-    }
-    return $result;
-  }
-
-  function modificarMazoDesc($conDb, $nombre, $desc)
-  {
-    $result =0;
-    try
-    {
-      $sql = "UPDATE mazos SET DESCRIPCION=:descripcion WHERE NOMBRE=:nombre";
-
-      $stmt = $conDb->prepare($sql);
-      $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
-      $stmt->bindParam(':descripcion', $desc,PDO::PARAM_STR);
-      
-      $stmt->execute();
-      $result = $stmt->rowCount();
-     }
-    catch (PDOException $ex)
-    {
-      echo ("Error en modificarMazo()".$ex->getMessage());
-    }
-    return $result;
-  }
-
-
-  /*function modificarMazo2($conDb, $nombre, $nombreCam, $desc){
+  function modificarMazo($conDb, $nombre, $nombreCam, $desc){
     $result =0;
     try
     {
       $sql = "";
+      $arr= array();
       if ($nombreCam != ""){
+        $arr[":nombre"] = $nombre;
         $arr[":nombreCam"] = $nombreCam;
         $sql = "UPDATE mazos SET NOMBRE=:nombreCam WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
       }
       if ($desc != ""){
-        $arr[":desc"] = $desc;
+        $arr[":nombre"] = $nombre;
+        $arr[":descripcion"] = $desc;
         $sql = "UPDATE mazos SET DESCRIPCION=:descripcion WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $descripcion,PDO::PARAM_STR);
       }
-      if (count($arr)==2){
+      if (count($arr)==3){
         $sql = "UPDATE mazos SET NOMBRE=:nombreCam, DESCRIPCION=:descripcion WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $descripcion,PDO::PARAM_STR);
       }
-      $stmt = $conDb->prepare($sql);
-      $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
-      $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
-      $stmt->bindParam(':descripcion', $desc,PDO::PARAM_STR);
-      
-      $stmt->execute();
+      $stmt->execute($arr);
       $result = $stmt->rowCount();
      }
     catch (PDOException $ex)
@@ -179,6 +181,113 @@
       echo ("Error en modificarMazo()".$ex->getMessage());
     }
     return $result;
-  }*/
+  }
+
+  function modificarCarta($conDb, $nombre, $mazo, $nombreCam, $anio, $imagen)
+  {
+    $result =0;
+    try
+    {
+      $sql = "";
+      $arr= array();
+      if ($mazo != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $sql = "UPDATE cartas SET MAZO=:mazo WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+      }
+
+      if ($nombreCam != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $arr[":nombreCam"] = $nombreCam;
+        $sql = "UPDATE cartas SET MAZO=:mazo, NOMBRE=:nombreCam WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
+      }
+
+      if ($anio != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $arr[":anio"] = $anio;
+        $sql = "UPDATE cartas SET MAZO=:mazo, ANIO=:anio WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':anio', $anio,PDO::PARAM_STR);
+      }
+
+      if ($imagen != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $arr[":imagen"] = $imagen;
+        $sql = "UPDATE cartas SET MAZO=:mazo, IMAGEN=:imagen WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $imagen,PDO::PARAM_STR);
+      }
+
+      if ($nombreCam != "" && $anio != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $arr[":nombreCam"] = $nombreCam;
+        $arr[":anio"] = $anio;
+        $sql = "UPDATE cartas SET MAZO=:mazo, NOMBRE=:nombreCam, ANIO=:anio WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
+        $stmt->bindParam(':anio', $anio,PDO::PARAM_STR);
+      }
+
+      if ($nombreCam != "" && $imagen != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $arr[":nombreCam"] = $nombreCam;
+        $arr[":imagen"] = $imagen;
+        $sql = "UPDATE cartas SET MAZO=:mazo, NOMBRE=:nombreCam, IMAGEN=:imagen WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $imagen,PDO::PARAM_STR);
+      }
+
+      if ($imagen != "" && $anio != ""){
+        $arr[":nombre"] = $nombre;
+        $arr[":mazo"] = $mazo;
+        $arr[":imagen"] = $imagen;
+        $arr[":anio"] = $anio;
+        $sql = "UPDATE cartas SET MAZO=:mazo, ANIO=:anio, IMAGEN=:imagen WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':anio', $anio,PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $imagen,PDO::PARAM_STR);
+      }
+
+      if (count($arr)==5){
+        $sql = "UPDATE cartas SET MAZO=:mazo, NOMBRE=:nombreCam, ANIO=:anio, IMAGEN=:imagen WHERE NOMBRE=:nombre";
+        $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+        $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
+        $stmt->bindParam(':mazo', $mazo,PDO::PARAM_STR);
+        $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
+        $stmt->bindParam(':anio', $anio,PDO::PARAM_STR);
+        $stmt->bindParam(':imagen', $imagen,PDO::PARAM_STR);
+      }
+      $stmt->execute($arr);
+      $result = $stmt->rowCount();
+     }
+    catch (PDOException $ex)
+    {
+      echo ("Error en modificarMazo()".$ex->getMessage());
+    }
+    return $result;
+  }
 
 ?>

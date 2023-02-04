@@ -21,20 +21,33 @@
 		require_once("dbutils.php");
       	$conDB = conectarDB();
 
-      	if (isset($_POST["nombre"]) && isset($_POST["descripcion"])) {
+      	if (isset($_POST["nombre"])) {
       		$nombre = $_POST["nombre"];
-			$desc = $_POST["descripcion"];
-			crearMazo($conDB, $nombre, $desc);
+			borrarCarta($conDB, $nombre);
       	}
 	?>
-	<h1 align="center">CREAR MAZO</h1>
+	<h1 align="center">BORRAR CARTA</h1>
 	<div class="container">
-		<form method="post" action="crearMazo.php"> 
-		NOMBRE &nbsp;<input type="text" placeholder="Introduce el nombre del mazo" name="nombre" required>
+		<form method="post" action="borrarCarta.php"> 
+		Elige Una Carta &nbsp;<select name="nombre">
+			<?php  
+				$mazos= getAllMazos($conDB);
+				$cartas= getAllCartas($conDB);
+				for ($i=0; $i < count($mazos); $i++) { 
+					echo "<optgroup label=".$mazos[$i]["NOMBRE"].">";
+						for ($j=0; $j < count($cartas); $j++) {
+							$cartaMazo= $cartas[$j]["MAZO"];
+							$mazoNombre= $mazos[$i]["NOMBRE"];
+							if ($mazoNombre == $cartaMazo){
+								echo "<option>".$cartas[$j]["NOMBRE"]."</option>";	
+							}
+						}
+					echo "</optgroup>";
+				}
+			?>
+		</select>
 		<br><br>
-		DESCRIPCION &nbsp;<input type="text" placeholder="Introduce la descripcion del mazo" name="descripcion">
-		<br><br>
-		<button>CREAR</button>
+		<button>BORRAR</button>
 		</form>
 	</div>
 </body>
