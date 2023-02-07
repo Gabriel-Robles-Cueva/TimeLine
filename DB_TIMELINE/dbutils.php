@@ -78,6 +78,26 @@
     return $vectorTotal;
   }
 
+  function getTopJugadores($conDb)
+  {
+    $vectorTotal = array();
+    try
+    {
+      $sql = "SELECT * FROM `jugadores` ORDER BY 4 DESC LIMIT 10;";
+      $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
+      $stmt->execute(array());
+      while($fila = $stmt->fetch(PDO::FETCH_ASSOC))
+      {
+        $vectorTotal[]=$fila;
+      }
+     }
+    catch (PDOException $ex)
+    {
+      echo ("Error al conectar".$ex->getMessage());
+    }
+    return $vectorTotal;
+  }
+
   //++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++CREAR++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\\
 
   function crearMazo($con, $nombre, $descripcion)
@@ -103,6 +123,21 @@
       $stmt->bindParam(':NOMBRE', $nombre);
       $stmt->bindParam(':ANIO', $anio);
       $stmt->bindParam(':IMAGEN', $img);
+      $stmt->execute();
+    } catch (Exception $ex) {
+      echo ("Error al crear ".$ex->getMessage());
+    }
+    return $con->lastInsertId();
+   }
+
+   function crearJugador($con, $nombre, $mazo, $puntos)
+   {
+    try {
+      $sql= "INSERT INTO jugadores(NOMBRE, MAZO, PUNTUACION) VALUES (:NOMBRE,:MAZO,:PUNTUACION)";
+      $stmt= $con->prepare($sql);
+      $stmt->bindParam(':NOMBRE', $nombre);
+      $stmt->bindParam(':MAZO', $mazo);
+      $stmt->bindParam(':PUNTUACION', $puntos);
       $stmt->execute();
     } catch (Exception $ex) {
       echo ("Error al crear ".$ex->getMessage());

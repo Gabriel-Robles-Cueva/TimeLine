@@ -17,9 +17,11 @@
     ></script>
 </head>
 <body>
-	<?php  
+	<?php
+		session_start();
 		require_once("dbutils.php");
-      	$conDB = conectarDB();
+  	$conDB = conectarDB();
+  	$_SESSION['mazo']= $_POST['mazo'];
 	?>
 	<h1 align="center">JUEGO PRACTICA</h1>
 	<div class="container">
@@ -27,7 +29,7 @@
 		<br><br>
 		<div class="input-group input-group-sm mb-3" style="width: 200px;">
 		  <span class="input-group-text" id="inputGroup-sizing-sm">PUNTUACION</span>
-		  <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+		  <input type="number" name='puntos' class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
 		</div>
 		<button class="btn btn-outline-primary">JUGAR</button>
 		</form>

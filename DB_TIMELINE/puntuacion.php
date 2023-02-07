@@ -17,16 +17,71 @@
     ></script>
 </head>
 <body>
-	<?php  
+	<?php
+		session_start();
 		require_once("dbutils.php");
       	$conDB = conectarDB();
+
+  	$_SESSION['puntos']= $_POST['puntos'];
 	?>
 	<h1 align="center">RANKING PUNTUACIONES</h1>
 	<div class="container">
-		<form method="post" action="dommy.php"> 
+		<form method="post" action="puntuacion2.php"> 
 		<br><br>
-		
-		<button class="btn btn-outline-primary">SALIR</button>
+		<table class="table">
+		  <thead>
+		    <tr>
+		      <th scope="col">#</th>
+		      <th scope="col">NOMBRE</th>
+		      <th scope="col">MAZO</th>
+		      <th scope="col">PUNTOS</th>
+		    </tr>
+		  </thead>
+		  <tbody>
+			<?php 
+				$resultados= getTopJugadores($conDB);
+				$puesto= 1;
+				$colocar= true;
+				for ($i=0; $i < count($resultados); $i++) {
+					if ($_SESSION['puntos']>$resultados[$i]["PUNTUACION"] && $colocar) {
+						echo "<tr>";
+			      echo "<th scope='row'>".$puesto."</th>";
+			      echo "<td><input type='text' name='nombre' placeholder='_ _ _ ' maxlength='3' minlength='3' style=' width: 40px'/></td>";
+			      echo "<td>".$_SESSION['mazo']."</td>";
+			      echo "<td>".$_SESSION['puntos']."</td>";
+			      echo "</tr>";
+			      $puesto++;
+			      $colocar= false;
+			      $i--;
+					}else{
+						echo "<tr>";
+			      echo "<th scope='row'>".$puesto."</th>";
+			      echo "<td>".$resultados[$i]["NOMBRE"]."</td>";
+			      echo "<td>".$resultados[$i]["MAZO"]."</td>";
+			      echo "<td>".$resultados[$i]["PUNTUACION"]."</td>";
+			      echo "</tr>";
+			      $puesto++;
+		    	}
+		    	if ($puesto>10 && $colocar) {
+	    			echo "<tr>";
+			      echo "<th scope='row'>...</th>";
+			      echo "<td><input type='text' name='nombre' placeholder='_ _ _ ' maxlength='3' minlength='3' style=' width: 40px'/></td>";
+			      echo "<td>".$_SESSION['mazo']."</td>";
+			      echo "<td>".$_SESSION['puntos']."</td>";
+			      echo "</tr>";
+			      $colocar= false;
+		    	}
+		    	if ($puesto>10) {
+		    		break;
+		    	}
+				}
+
+			?>
+		  </tbody>
+		</table>
+		<br><br>
+		<button class="btn btn-outline-primary">GUARDAR</button>
+		<button class="btn btn-outline-primary" formaction="inicio.php">SALIR</button>
 		</form>
 	</div>
 </body>

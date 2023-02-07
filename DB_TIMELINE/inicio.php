@@ -17,14 +17,16 @@
     ></script>
 </head>
 <body>
-	<?php  
+	<?php
+		session_start();
 		require_once("dbutils.php");
       	$conDB = conectarDB();
 	?>
 	<h1 align="center">INICIO TIMELINE</h1>
 	<div class="container">
 		<form method="post" action="dommy.php"> 
-		<h3>Elige Un Mazo:</h3> &nbsp;&nbsp;<select name="nombre" class="form-select" style="width: 200px;">
+		<h3>Elige Un Mazo:</h3> &nbsp;&nbsp;
+		<select name="mazo" class="form-select" style="width: 200px;">
 			<?php  
 				$resultados= getAllMazos($conDB);
 				var_export($resultados);
