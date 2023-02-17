@@ -156,7 +156,7 @@
       $stmt->execute();
       $result= $stmt->rowCount();
     } 
-    catch (Exception $e) {
+    catch (Exception $ex) {
       echo ("Error al borrar".$ex->getMessage());
     }
     return $result;
@@ -171,7 +171,7 @@
       $stmt->execute();
       $result= $stmt->rowCount();
     } 
-    catch (Exception $e) {
+    catch (Exception $ex) {
       echo ("Error al borrar".$ex->getMessage());
     }
     return $result;
@@ -199,14 +199,14 @@
         $sql = "UPDATE mazos SET DESCRIPCION=:descripcion WHERE NOMBRE=:nombre";
         $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
         $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
-        $stmt->bindParam(':descripcion', $descripcion,PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $desc,PDO::PARAM_STR);
       }
       if (count($arr)==3){
         $sql = "UPDATE mazos SET NOMBRE=:nombreCam, DESCRIPCION=:descripcion WHERE NOMBRE=:nombre";
         $stmt = $conDb->prepare($sql,array(PDO::ATTR_CURSOR=>PDO::CURSOR_FWDONLY));
         $stmt->bindParam(':nombre', $nombre,PDO::PARAM_STR);
         $stmt->bindParam(':nombreCam', $nombreCam,PDO::PARAM_STR);
-        $stmt->bindParam(':descripcion', $descripcion,PDO::PARAM_STR);
+        $stmt->bindParam(':descripcion', $desc,PDO::PARAM_STR);
       }
       $stmt->execute($arr);
       $result = $stmt->rowCount();
@@ -324,5 +324,3 @@
     }
     return $result;
   }
-
-?>
